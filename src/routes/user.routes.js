@@ -1,10 +1,21 @@
-import { Router, Router } from "express";
-import { Route } from "react-router-dom";
-import { registerUser } from "../controllers/user.controller";
+import { Router } from "express";
+import { registerUser } from "../controllers/user.controller.js";
+import {upload} from "../middlewares/multer.middleware.js";
+const router = Router();
 
-const Router = Router()
+router.route("/register").post(
+    upload.fields([
+        {
+            name:"avatar",
+            maxCount:1
+        },
+        {
+            name:"coverImage",
+            maxCount:1
+        }
+    ]),
+    registerUser
+    )
 
-Router.Route("/register").post(registerUser.js)
 
-
-export default Router
+export default router
